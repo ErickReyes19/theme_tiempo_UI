@@ -382,3 +382,39 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* PHP menu shortcode rendering */
+.tn-menu {
+  display: block;
+}
+
+.tn-menu__items,
+.tn-menu__items ul {
+  display: flex;
+  list-style: none;
+  gap: .85rem;
+  margin: 0;
+  padding: 0;
+}
+
+.tn-main-nav .tn-menu__items {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.tn-menu__items a {
+  text-decoration: none;
+}
+
+.tn-footer-nav .tn-menu__items {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tn-ad-layout-wrapper {
+  margin-bottom: 1rem;
+}
+
+.tn-ad-slots-list code {
+  font-weight: 700;
+}

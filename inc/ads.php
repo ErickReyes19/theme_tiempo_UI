@@ -31,6 +31,7 @@ function tiempo_noticias_ad_slots() {
 function tiempo_noticias_register_ad_settings() {
 	register_setting( 'reading', 'tiempo_noticias_ads_enabled', array( 'type' => 'boolean', 'sanitize_callback' => 'rest_sanitize_boolean' ) );
 	register_setting( 'reading', 'tiempo_noticias_ad_markup', array( 'type' => 'array', 'sanitize_callback' => 'tiempo_noticias_sanitize_ad_markup' ) );
+	register_setting( 'reading', 'tiempo_noticias_ad_layout_markup', array( 'type' => 'string', 'sanitize_callback' => 'tiempo_noticias_sanitize_ad_layout_markup' ) );
 
 	add_settings_section( 'tiempo_noticias_ads', __( 'Tiempo Noticias Ads', 'tiempo-noticias' ), '__return_false', 'reading' );
 
@@ -52,6 +53,14 @@ function tiempo_noticias_register_ad_settings() {
 			array( 'slot' => $slot )
 		);
 	}
+
+	add_settings_field(
+		'tiempo_noticias_ad_layout_markup',
+		__( 'Custom ad layout structure', 'tiempo-noticias' ),
+		'tiempo_noticias_ad_layout_field',
+		'reading',
+		'tiempo_noticias_ads'
+	);
 }
 add_action( 'admin_init', 'tiempo_noticias_register_ad_settings' );
 
@@ -81,6 +90,18 @@ function tiempo_noticias_sanitize_ad_markup( $value ) {
 }
 
 /**
+ * Sanitize ad layout field.
+ *
+ * @param string $value Layout content.
+ * @return string
+ */
+function tiempo_noticias_sanitize_ad_layout_markup( $value ) {
+	$allowed = wp_kses_allowed_html( 'post' );
+
+	return wp_kses( (string) $value, $allowed );
+}
+
+/**
  * Render checkbox.
  */
 function tiempo_noticias_ads_enabled_field() {
@@ -105,6 +126,17 @@ function tiempo_noticias_ad_markup_field( $args ) {
 	?>
 	<textarea name="tiempo_noticias_ad_markup[<?php echo esc_attr( $slot ); ?>]" rows="4" cols="60" class="large-text code"><?php echo esc_textarea( $value ); ?></textarea>
 	<p class="description"><?php esc_html_e( 'Paste Google Ad Manager snippet or custom HTML for this slot.', 'tiempo-noticias' ); ?></p>
+	<?php
+}
+
+/**
+ * Render ad layout textarea.
+ */
+function tiempo_noticias_ad_layout_field() {
+	$value = (string) get_option( 'tiempo_noticias_ad_layout_markup', '' );
+	?>
+	<textarea name="tiempo_noticias_ad_layout_markup" rows="8" cols="60" class="large-text code" placeholder='<div class="mi-layout"><div>[tiempo_ad slot="below_hero"]</div><div>[tiempo_ad slot="sidebar_ad"]</div></div>'><?php echo esc_textarea( $value ); ?></textarea>
+	<p class="description"><?php esc_html_e( 'Define your own ad structure using HTML + [tiempo_ad slot="..."] shortcodes. Print it with [tiempo_ad_layout].', 'tiempo-noticias' ); ?></p>
 	<?php
 }
 
@@ -150,6 +182,46 @@ function tiempo_noticias_ad_slot_shortcode( $atts ) {
 	return tiempo_noticias_render_ad_slot( $atts['slot'], $atts['class'] );
 }
 add_shortcode( 'tiempo_ad', 'tiempo_noticias_ad_slot_shortcode' );
+
+/**
+ * Render user-custom ad structure.
+ *
+ * @return string
+ */
+function tiempo_noticias_render_ad_layout() {
+	$layout = (string) get_option( 'tiempo_noticias_ad_layout_markup', '' );
+
+	if ( '' === trim( $layout ) ) {
+		$layout = '<div class="tn-ad-layout tn-ad-layout--default">[tiempo_ad slot="below_hero"]</div>';
+	}
+
+	return do_shortcode( $layout );
+}
+
+/**
+ * Shortcode for ad layout.
+ *
+ * @return string
+ */
+function tiempo_noticias_ad_layout_shortcode() {
+	return tiempo_noticias_render_ad_layout();
+}
+add_shortcode( 'tiempo_ad_layout', 'tiempo_noticias_ad_layout_shortcode' );
+
+/**
+ * Shortcode to list available ad slots.
+ *
+ * @return string
+ */
+function tiempo_noticias_ad_slots_list_shortcode() {
+	$items = '';
+	foreach ( tiempo_noticias_ad_slots() as $slot => $label ) {
+		$items .= '<li><code>' . esc_html( $slot ) . '</code> — ' . esc_html( $label ) . '</li>';
+	}
+
+	return '<ul class="tn-ad-slots-list">' . $items . '</ul>';
+}
+add_shortcode( 'tiempo_ad_slots', 'tiempo_noticias_ad_slots_list_shortcode' );
 
 /**
  * Add in-article ad after second paragraph.
