@@ -159,3 +159,93 @@ function tiempo_noticias_related_posts_shortcode( $atts ) {
 	return $output;
 }
 add_shortcode( 'tiempo_related', 'tiempo_noticias_related_posts_shortcode' );
+
+
+/**
+ * Latest posts from different categories shortcode.
+ * Usage: [tiempo_home_latest_by_category count="5" title="Últimas por categoría"]
+ *
+ * @param array $atts Shortcode attributes.
+ * @return string
+ */
+function tiempo_noticias_home_latest_by_category_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'count' => 5,
+			'title' => __( 'Últimas por categoría', 'tiempo-noticias' ),
+		),
+		$atts,
+		'tiempo_home_latest_by_category'
+	);
+
+	$limit = max( 1, (int) $atts['count'] );
+
+	$query = new WP_Query(
+		array(
+			'post_type'           => 'post',
+			'posts_per_page'      => 40,
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+		)
+	);
+
+	if ( ! $query->have_posts() ) {
+		return '';
+	}
+
+	$selected_posts = array();
+	$used_categories = array();
+
+	while ( $query->have_posts() && count( $selected_posts ) < $limit ) {
+		$query->the_post();
+		$post_id = get_the_ID();
+		$terms   = get_the_category( $post_id );
+
+		if ( empty( $terms ) ) {
+			continue;
+		}
+
+		$primary_category = (int) $terms[0]->term_id;
+
+		if ( in_array( $primary_category, $used_categories, true ) ) {
+			continue;
+		}
+
+		$used_categories[] = $primary_category;
+		$selected_posts[]  = $post_id;
+	}
+	wp_reset_postdata();
+
+	if ( empty( $selected_posts ) ) {
+		return '';
+	}
+
+	$output  = '<section class="tn-home-latest-categories">';
+	$output .= '<div class="tn-section-title">';
+	$output .= '<h3>' . esc_html( $atts['title'] ) . '</h3>';
+	$output .= '<p class="has-sm-font-size">' . esc_html__( '5 notas recientes de secciones diferentes', 'tiempo-noticias' ) . '</p>';
+	$output .= '</div>';
+	$output .= '<div class="tn-home-latest-categories__grid">';
+
+	foreach ( $selected_posts as $post_id ) {
+		$title = get_the_title( $post_id );
+		$link  = get_permalink( $post_id );
+		$date  = get_the_date( 'j M Y', $post_id );
+		$thumb = get_the_post_thumbnail( $post_id, 'tiempo-card', array( 'loading' => 'lazy' ) );
+		$terms = get_the_category( $post_id );
+		$cat   = ! empty( $terms ) ? $terms[0]->name : __( 'General', 'tiempo-noticias' );
+
+		$output .= '<article class="tn-home-latest-categories__item tn-post-card">';
+		$output .= '<a class="tn-home-latest-categories__thumb" href="' . esc_url( $link ) . '">' . $thumb . '</a>';
+		$output .= '<div class="tn-home-latest-categories__content">';
+		$output .= '<p class="tn-home-latest-categories__cat">' . esc_html( $cat ) . '</p>';
+		$output .= '<h4><a href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a></h4>';
+		$output .= '<time datetime="' . esc_attr( get_the_date( DATE_W3C, $post_id ) ) . '">' . esc_html( $date ) . '</time>';
+		$output .= '</div></article>';
+	}
+
+	$output .= '</div></section>';
+
+	return $output;
+}
+add_shortcode( 'tiempo_home_latest_by_category', 'tiempo_noticias_home_latest_by_category_shortcode' );

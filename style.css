@@ -277,3 +277,108 @@ p {
     grid-template-columns: 1fr;
   }
 }
+
+/* Navigation and footer */
+.tn-site-header .wp-block-navigation {
+  width: auto;
+}
+
+.tn-site-header .wp-block-navigation__container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: .9rem;
+}
+
+.tn-site-footer .wp-block-navigation__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: center;
+}
+
+/* Keep post images contained in cards and single templates */
+.wp-block-post-featured-image,
+.wp-block-post-featured-image a {
+  overflow: hidden;
+}
+
+.wp-block-post-featured-image img,
+.tn-post-card .wp-block-post-featured-image img,
+.tn-related-posts__item img,
+.tn-home-latest-categories__thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.tn-related-posts__item {
+  min-width: 0;
+}
+
+.tn-related-posts__item a {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Latest by category home block */
+.tn-home-latest-categories {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--stroke);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.tn-home-latest-categories__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.tn-home-latest-categories__item {
+  border: 1px solid var(--wp--preset--color--stroke);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.tn-home-latest-categories__thumb {
+  aspect-ratio: 16 / 9;
+  display: block;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.tn-home-latest-categories__content {
+  padding: .8rem;
+}
+
+.tn-home-latest-categories__cat {
+  margin: 0 0 .35rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--accent);
+}
+
+.tn-home-latest-categories__content h4 {
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+}
+
+.tn-home-latest-categories__content h4 a {
+  text-decoration: none;
+}
+
+.tn-home-latest-categories__content time {
+  font-size: .78rem;
+  color: var(--wp--preset--color--muted);
+}
+
+@media (max-width: 781px) {
+  .tn-home-latest-categories__grid,
+  .tn-related-posts__grid {
+    grid-template-columns: 1fr;
+  }
+}
