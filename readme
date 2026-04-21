@@ -1,1 +1,58 @@
-theme para diario tiempo wordpress con UX UI
+# Tiempo Noticias Theme (WordPress Block Theme)
+
+Tema editorial para noticias con enfoque en UX/UI y monetización.
+
+## Navegación y footer (ya visibles por defecto)
+- El **header** usa el shortcode `[tiempo_menu location="primary"]` en `parts/header.html`.
+- El **footer** usa `[tiempo_menu location="footer"]` en `parts/footer.html`.
+- Si no existe menú asignado en WordPress, se mostrará automáticamente una lista de páginas como fallback.
+
+Asigna tus menús en:
+- **Apariencia → Menús** (o Editor del sitio) y vincula ubicaciones `primary` y `footer`.
+
+## Dónde agregar y personalizar anuncios
+### 1) Cargar el código de cada slot
+Ve a **Ajustes → Lectura → Tiempo Noticias Ads** y pega tus snippets en cada slot.
+
+Slots disponibles:
+- `header_top_banner`
+- `below_hero`
+- `sidebar_ad`
+- `in_article_ad`
+- `after_first_post`
+- `footer_banner`
+
+### 2) Controlar la estructura (layout) de anuncios
+En el mismo panel existe el campo **Custom ad layout structure**.
+
+Ahí puedes definir HTML + shortcodes, por ejemplo:
+
+```html
+<div class="mi-layout-anuncios">
+  <div>[tiempo_ad slot="below_hero"]</div>
+  <div>[tiempo_ad slot="sidebar_ad"]</div>
+</div>
+```
+
+Ese layout se imprime usando `[tiempo_ad_layout]` (incluido en `parts/ad-layout.html` y llamado desde las plantillas principales).
+
+### 3) Mover dónde aparece el layout
+Puedes moverlo en estos archivos template:
+- `templates/front-page.html`
+- `templates/home.html`
+- `templates/archive.html`
+- `templates/index.html`
+- `templates/single.html`
+
+Busca este bloque:
+
+```html
+<!-- wp:template-part {"slug":"ad-layout","theme":"tiempo-noticias"} /-->
+```
+
+y colócalo donde quieras.
+
+## Shortcodes útiles
+- `[tiempo_ad slot="sidebar_ad"]` → imprime un slot puntual.
+- `[tiempo_ad_layout]` → imprime tu estructura personalizada completa.
+- `[tiempo_ad_slots]` → lista rápida de slots disponibles.
