@@ -20,15 +20,8 @@ function tiempo_noticias_setup() {
 	add_theme_support( 'wp-block-styles' );
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) );
-	add_theme_support(
-		'custom-logo',
-		array(
-			'height'      => 72,
-			'width'       => 300,
-			'flex-height' => true,
-			'flex-width'  => true,
-		)
-	);
+	add_theme_support( 'custom-logo', array( 'height' => 72, 'width' => 320, 'flex-height' => true, 'flex-width' => true ) );
+	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	add_image_size( 'tiempo-hero', 1200, 675, true );
 	add_image_size( 'tiempo-card', 720, 405, true );
@@ -37,22 +30,31 @@ function tiempo_noticias_setup() {
 add_action( 'after_setup_theme', 'tiempo_noticias_setup' );
 
 /**
- * Register block patterns.
+ * Register sidebars.
  */
-function tiempo_noticias_register_patterns() {
-	$patterns = array(
-		'hero-home',
-		'section-trending',
-		'section-latest',
-		'section-category-grid',
-		'section-ad-banner',
+function tiempo_noticias_register_sidebars() {
+	register_sidebar(
+		array(
+			'name'          => __( 'Sidebar', 'tiempo-noticias' ),
+			'id'            => 'sidebar-1',
+			'before_widget' => '<section class="tn-widget">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h3 class="tn-widget-title">',
+			'after_title'   => '</h3>',
+		)
 	);
 
-	foreach ( $patterns as $pattern ) {
-		register_block_pattern(
-			'tiempo-noticias/' . $pattern,
-			require TIEMPO_NOTICIAS_PATH . '/patterns/' . $pattern . '.php'
+	for ( $i = 1; $i <= 3; $i++ ) {
+		register_sidebar(
+			array(
+				'name'          => sprintf( __( 'Footer Column %d', 'tiempo-noticias' ), $i ),
+				'id'            => 'footer-' . $i,
+				'before_widget' => '<section class="tn-widget">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h3 class="tn-widget-title">',
+				'after_title'   => '</h3>',
+			)
 		);
 	}
 }
-add_action( 'init', 'tiempo_noticias_register_patterns' );
+add_action( 'widgets_init', 'tiempo_noticias_register_sidebars' );
