@@ -1,0 +1,20 @@
+<!-- wp:template-part {"slug":"header","theme":"tiempo-noticias","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained"},"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|70"}}}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--70)">
+	<!-- wp:query {"queryId":10,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date"},"layout":{"type":"default"}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template {"layout":{"type":"grid","columnCount":2}} -->
+			<!-- wp:template-part {"slug":"post-card","theme":"tiempo-noticias"} /-->
+		<!-- /wp:post-template -->
+		<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+	</div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","theme":"tiempo-noticias","area":"footer"} /-->
