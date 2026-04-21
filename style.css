@@ -7,19 +7,15 @@ Description: Block Theme editorial premium para portal de noticias con enfoque e
 Requires at least: 6.5
 Tested up to: 6.6
 Requires PHP: 8.0
-Version: 1.0.0
+Version: 1.2.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: tiempo-noticias
 Tags: block-theme, full-site-editing, news, blog, custom-logo, accessibility-ready
 */
 
-/*
- * Estilos mínimos globales que complementan theme.json.
- * La mayoría de decisiones de diseño se gestionan desde theme.json para edición visual coherente.
- */
 :root {
-  --tn-transition: 180ms ease;
+  --tn-transition: 220ms ease;
 }
 
 body {
@@ -47,9 +43,56 @@ select:focus-visible {
   border: 0;
 }
 
+.tn-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+}
+
+/* Breaking ticker */
+.tn-breaking-ticker {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  border-radius: 999px;
+  border: 1px solid var(--wp--preset--color--stroke);
+  padding: .4rem .75rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tn-breaking-ticker__label {
+  white-space: nowrap;
+  background: var(--wp--preset--color--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: .2rem .65rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.tn-breaking-ticker__list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tn-breaking-ticker__list a {
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: .9rem;
+}
+
+/* Ads */
 .tn-ad-slot {
   border: 1px dashed var(--wp--preset--color--stroke);
-  border-radius: var(--wp--preset--spacing--20);
+  border-radius: 12px;
   background: var(--wp--preset--color--surface);
   color: var(--wp--preset--color--muted);
   text-align: center;
@@ -59,8 +102,56 @@ select:focus-visible {
   font-size: 0.875rem;
 }
 
+/* Home UI components */
+.tn-hero-shell {
+  background: linear-gradient(135deg, #fff, #f8fafc);
+  border-radius: 16px;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+.tn-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--wp--preset--color--stroke);
+  padding-bottom: .75rem;
+  margin-bottom: 1rem;
+}
+
+.tn-breaking-news {
+  border-inline-start: 4px solid var(--wp--preset--color--accent);
+  border-radius: 12px;
+}
+
+.tn-home-sidebar {
+  background: var(--wp--preset--color--surface);
+  border: 1px solid var(--wp--preset--color--stroke);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.tn-newsletter-box {
+  background: #0f172a;
+  color: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.tn-newsletter-box a {
+  color: #fff;
+}
+
+/* Post cards */
 .tn-post-card {
   height: 100%;
+  transition: transform var(--tn-transition), box-shadow var(--tn-transition);
+}
+
+.tn-post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.09);
 }
 
 .tn-post-card .wp-block-post-title a {
@@ -71,6 +162,59 @@ select:focus-visible {
   color: var(--wp--preset--color--accent);
 }
 
-.tn-breaking-news {
-  border-inline-start: 4px solid var(--wp--preset--color--accent);
+/* Related notes in single */
+.tn-related-posts {
+  border-top: 1px solid var(--wp--preset--color--stroke);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+.tn-related-posts h3 {
+  margin: 0 0 1rem;
+}
+
+.tn-related-posts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.tn-related-posts__item img {
+  border-radius: 10px;
+  margin-bottom: .45rem;
+}
+
+.tn-related-posts__item h4 {
+  font-size: .98rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.tn-related-posts__item a {
+  text-decoration: none;
+}
+
+@media (max-width: 920px) {
+  .tn-related-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 781px) {
+  .tn-section-title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tn-site-header {
+    position: static;
+  }
+
+  .tn-breaking-ticker {
+    border-radius: 12px;
+  }
+
+  .tn-related-posts__grid {
+    grid-template-columns: 1fr;
+  }
 }
