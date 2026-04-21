@@ -16,6 +16,28 @@
 		<div class="wp-block-column" style="flex-basis:68%">
 			<!-- wp:pattern {"slug":"tiempo-noticias/section-latest"} /-->
 			<!-- wp:pattern {"slug":"tiempo-noticias/section-category-grid"} /-->
+
+			<!-- wp:group {"className":"tn-home-panel","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group tn-home-panel">
+				<!-- wp:group {"className":"tn-section-title","layout":{"type":"flex","justifyContent":"space-between"}} -->
+				<div class="wp-block-group tn-section-title">
+					<!-- wp:heading {"level":3} -->
+					<h3 class="wp-block-heading">Más noticias</h3>
+					<!-- /wp:heading -->
+					<!-- wp:paragraph {"fontSize":"sm"} -->
+					<p class="has-sm-font-size">Cobertura continua</p>
+					<!-- /wp:paragraph -->
+				</div>
+				<!-- /wp:group -->
+				<!-- wp:query {"query":{"perPage":6,"offset":6,"postType":"post","order":"desc","orderBy":"date"}} -->
+				<div class="wp-block-query">
+					<!-- wp:post-template {"layout":{"type":"grid","columnCount":2}} -->
+						<!-- wp:template-part {"slug":"post-card","theme":"tiempo-noticias"} /-->
+					<!-- /wp:post-template -->
+				</div>
+				<!-- /wp:query -->
+			</div>
+			<!-- /wp:group -->
 		</div>
 		<!-- /wp:column -->
 
@@ -25,6 +47,7 @@
 			<div class="wp-block-group tn-home-sidebar">
 				<!-- wp:pattern {"slug":"tiempo-noticias/section-trending"} /-->
 				<!-- wp:shortcode -->[tiempo_ad slot="sidebar_ad"]<!-- /wp:shortcode -->
+				<!-- wp:latest-posts {"postsToShow":7,"displayPostDate":true} /-->
 				<!-- wp:group {"className":"tn-newsletter-box","layout":{"type":"constrained"}} -->
 				<div class="wp-block-group tn-newsletter-box">
 					<!-- wp:heading {"level":4,"textColor":"surface"} -->

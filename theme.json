@@ -5,36 +5,112 @@
     "appearanceTools": true,
     "layout": {
       "contentSize": "760px",
-      "wideSize": "1280px"
+      "wideSize": "1280px",
+      "allowEditing": true
     },
     "color": {
-      "defaultPalette": false,
+      "defaultPalette": true,
       "palette": [
-        { "slug": "bg", "name": "Background", "color": "#f6f7fb" },
-        { "slug": "surface", "name": "Surface", "color": "#ffffff" },
-        { "slug": "text", "name": "Text", "color": "#111827" },
-        { "slug": "muted", "name": "Muted", "color": "#6b7280" },
-        { "slug": "accent", "name": "Accent", "color": "#d90429" },
-        { "slug": "accent-2", "name": "Accent Soft", "color": "#edf2f7" },
-        { "slug": "dark", "name": "Dark", "color": "#0f172a" },
-        { "slug": "stroke", "name": "Stroke", "color": "#e5e7eb" }
+        {
+          "slug": "bg",
+          "name": "Background",
+          "color": "#f6f7fb"
+        },
+        {
+          "slug": "surface",
+          "name": "Surface",
+          "color": "#ffffff"
+        },
+        {
+          "slug": "text",
+          "name": "Text",
+          "color": "#111827"
+        },
+        {
+          "slug": "muted",
+          "name": "Muted",
+          "color": "#6b7280"
+        },
+        {
+          "slug": "accent",
+          "name": "Accent",
+          "color": "#d90429"
+        },
+        {
+          "slug": "accent-2",
+          "name": "Accent Soft",
+          "color": "#edf2f7"
+        },
+        {
+          "slug": "dark",
+          "name": "Dark",
+          "color": "#0f172a"
+        },
+        {
+          "slug": "stroke",
+          "name": "Stroke",
+          "color": "#e5e7eb"
+        }
       ],
       "duotone": [],
-      "gradients": []
+      "gradients": [],
+      "custom": true,
+      "customDuotone": true,
+      "customGradient": true
     },
     "spacing": {
       "defaultSpacingSizes": false,
       "spacingSizes": [
-        { "slug": "10", "name": "2xs", "size": "0.25rem" },
-        { "slug": "20", "name": "xs", "size": "0.5rem" },
-        { "slug": "30", "name": "sm", "size": "0.75rem" },
-        { "slug": "40", "name": "md", "size": "1rem" },
-        { "slug": "50", "name": "lg", "size": "1.5rem" },
-        { "slug": "60", "name": "xl", "size": "2rem" },
-        { "slug": "70", "name": "2xl", "size": "3rem" },
-        { "slug": "80", "name": "3xl", "size": "4rem" }
+        {
+          "slug": "10",
+          "name": "2xs",
+          "size": "0.25rem"
+        },
+        {
+          "slug": "20",
+          "name": "xs",
+          "size": "0.5rem"
+        },
+        {
+          "slug": "30",
+          "name": "sm",
+          "size": "0.75rem"
+        },
+        {
+          "slug": "40",
+          "name": "md",
+          "size": "1rem"
+        },
+        {
+          "slug": "50",
+          "name": "lg",
+          "size": "1.5rem"
+        },
+        {
+          "slug": "60",
+          "name": "xl",
+          "size": "2rem"
+        },
+        {
+          "slug": "70",
+          "name": "2xl",
+          "size": "3rem"
+        },
+        {
+          "slug": "80",
+          "name": "3xl",
+          "size": "4rem"
+        }
       ],
-      "units": ["px", "rem", "%", "vh", "vw"]
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vh",
+        "vw"
+      ],
+      "margin": true,
+      "padding": true
     },
     "typography": {
       "defaultFontSizes": false,
@@ -51,27 +127,59 @@
         }
       ],
       "fontSizes": [
-        { "slug": "xs", "size": "0.75rem", "name": "XS" },
-        { "slug": "sm", "size": "0.875rem", "name": "SM" },
-        { "slug": "md", "size": "1rem", "name": "MD" },
-        { "slug": "lg", "size": "1.125rem", "name": "LG" },
-        { "slug": "xl", "size": "1.5rem", "name": "XL" },
-        { "slug": "2xl", "size": "2rem", "name": "2XL" },
-        { "slug": "3xl", "size": "2.75rem", "name": "3XL" }
+        {
+          "slug": "xs",
+          "size": "0.75rem",
+          "name": "XS"
+        },
+        {
+          "slug": "sm",
+          "size": "0.875rem",
+          "name": "SM"
+        },
+        {
+          "slug": "md",
+          "size": "1rem",
+          "name": "MD"
+        },
+        {
+          "slug": "lg",
+          "size": "1.125rem",
+          "name": "LG"
+        },
+        {
+          "slug": "xl",
+          "size": "1.5rem",
+          "name": "XL"
+        },
+        {
+          "slug": "2xl",
+          "size": "2rem",
+          "name": "2XL"
+        },
+        {
+          "slug": "3xl",
+          "size": "2.75rem",
+          "name": "3XL"
+        }
       ],
       "lineHeight": true,
       "letterSpacing": true,
       "textDecoration": true,
-      "textTransform": true
+      "textTransform": true,
+      "customFontSize": true,
+      "fluid": true,
+      "dropCap": false
     },
     "border": {
       "radius": true,
       "width": true,
       "style": true,
-      "color": true
+      "color": true,
+      "customRadius": true
     },
     "shadow": {
-      "defaultPresets": false,
+      "defaultPresets": true,
       "presets": [
         {
           "name": "Soft",
@@ -95,6 +203,14 @@
         "typography": {
           "lineHeight": "1.2"
         }
+      }
+    },
+    "custom": {
+      "content": {
+        "readingMaxWidth": "74ch"
+      },
+      "tn": {
+        "cardRadius": "14px"
       }
     }
   },
@@ -187,10 +303,30 @@
     }
   },
   "templateParts": [
-    { "name": "header", "title": "Header", "area": "header" },
-    { "name": "footer", "title": "Footer", "area": "footer" },
-    { "name": "post-meta", "title": "Post Meta", "area": "uncategorized" },
-    { "name": "post-card", "title": "Post Card", "area": "uncategorized" },
-    { "name": "ad-slot", "title": "Ad Slot", "area": "uncategorized" }
+    {
+      "name": "header",
+      "title": "Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "area": "footer"
+    },
+    {
+      "name": "post-meta",
+      "title": "Post Meta",
+      "area": "uncategorized"
+    },
+    {
+      "name": "post-card",
+      "title": "Post Card",
+      "area": "uncategorized"
+    },
+    {
+      "name": "ad-slot",
+      "title": "Ad Slot",
+      "area": "uncategorized"
+    }
   ]
 }
