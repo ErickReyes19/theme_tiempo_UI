@@ -1,58 +1,64 @@
-# Tiempo Noticias Theme (WordPress Block Theme)
+# Tiempo Noticias Theme (Editorial, modular)
 
-Tema editorial para noticias con enfoque en UX/UI y monetización.
+Theme de noticias moderno con **Template Builder**, **Header/Footer Builder** y **Ads Manager** de slots manuales.
 
-## Navegación y footer (ya visibles por defecto)
-- El **header** usa el shortcode `[tiempo_menu location="primary"]` en `parts/header.html`.
-- El **footer** usa `[tiempo_menu location="footer"]` en `parts/footer.html`.
-- Si no existe menú asignado en WordPress, se mostrará automáticamente una lista de páginas como fallback.
+## Instalación rápida
+1. Copia la carpeta `theme_tiempo_UI` a `wp-content/themes/tiempo-noticias`.
+2. Activa el theme en **Apariencia → Temas**.
+3. Ve a:
+   - **Template Builder** para crear y asignar templates por vista.
+   - **Apariencia → Layout Builder** para header/footer global.
+   - **Apariencia → Ads Manager** para slots de anuncios y reglas por dispositivo.
+4. Asigna menús en **Apariencia → Menús** (`primary`, `secondary`, `footer`, `legal`).
 
-Asigna tus menús en:
-- **Apariencia → Menús** (o Editor del sitio) y vincula ubicaciones `primary` y `footer`.
+## Flujo de uso
+### 1) Template Builder
+- Crea templates (`tn_template`) y edita su contenido por bloques.
+- Configura reglas:
+  - Homepage, home blog, single, page, category, tag, archive, search, 404.
+  - Filtros opcionales por post type, categoría, tag.
+  - Prioridad numérica para resolver conflictos.
+- Publica para activar o deja en borrador.
+- Puedes duplicar templates desde la lista.
 
-## Dónde agregar y personalizar anuncios
-### 1) Cargar el código de cada slot
-Ve a **Ajustes → Lectura → Tiempo Noticias Ads** y pega tus snippets en cada slot.
+### 2) Header/Footer Builder
+En **Layout Builder**:
+- Bloque superior HTML del header.
+- Buscador on/off.
+- CTA del header (texto y URL).
+- Disclaimer legal del footer.
+- Copyright.
+- Activar/desactivar ad slot en header/footer.
 
-Slots disponibles:
-- `header_top_banner`
-- `below_hero`
-- `sidebar_ad`
-- `in_article_ad`
-- `after_first_post`
-- `footer_banner`
+### 3) Ads Manager
+En **Apariencia → Ads Manager**:
+- Activa/desactiva cada slot.
+- Pega código de Google Ad Manager o AdSense.
+- Define visibilidad por dispositivo (desktop/tablet/mobile).
+- Configura comportamiento (`fixed`, `responsive`, `sticky`, `inline`).
+- Slot de entre párrafos configurable por número de párrafo.
 
-### 2) Controlar la estructura (layout) de anuncios
-En el mismo panel existe el campo **Custom ad layout structure**.
+Slots soportados:
+- `header`
+- `below_header`
+- `before_title`
+- `after_title`
+- `in_content`
+- `between_paragraphs`
+- `before_content`
+- `after_content`
+- `home_between_blocks`
+- `sidebar`
+- `footer`
 
-Ahí puedes definir HTML + shortcodes, por ejemplo:
+## Estructura
+- `functions.php`
+- `style.css`
+- `header.php`, `footer.php`
+- `front-page.php`, `home.php`, `single.php`, `page.php`, `archive.php`, `category.php`, `tag.php`, `search.php`, `404.php`, `index.php`
+- `inc/template-builder.php`
+- `inc/layout-builder.php`
+- `inc/ads.php`
+- `template-parts/`
+- `assets/css/ui.css`, `assets/js/theme.js`
 
-```html
-<div class="mi-layout-anuncios">
-  <div>[tiempo_ad slot="below_hero"]</div>
-  <div>[tiempo_ad slot="sidebar_ad"]</div>
-</div>
-```
-
-Ese layout se imprime usando `[tiempo_ad_layout]` (incluido en `parts/ad-layout.html` y llamado desde las plantillas principales).
-
-### 3) Mover dónde aparece el layout
-Puedes moverlo en estos archivos template:
-- `templates/front-page.html`
-- `templates/home.html`
-- `templates/archive.html`
-- `templates/index.html`
-- `templates/single.html`
-
-Busca este bloque:
-
-```html
-<!-- wp:template-part {"slug":"ad-layout","theme":"tiempo-noticias"} /-->
-```
-
-y colócalo donde quieras.
-
-## Shortcodes útiles
-- `[tiempo_ad slot="sidebar_ad"]` → imprime un slot puntual.
-- `[tiempo_ad_layout]` → imprime tu estructura personalizada completa.
-- `[tiempo_ad_slots]` → lista rápida de slots disponibles.
