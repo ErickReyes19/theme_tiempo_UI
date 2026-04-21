@@ -11,20 +11,7 @@
 			<!-- wp:post-featured-image {"aspectRatio":"16/9","sizeSlug":"tiempo-hero"} /-->
 			<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
 
-			<!-- wp:group {"className":"tn-related-posts","layout":{"type":"constrained"}} -->
-			<div class="wp-block-group tn-related-posts">
-				<!-- wp:heading {"level":3} -->
-				<h3 class="wp-block-heading">Notas relacionadas</h3>
-				<!-- /wp:heading -->
-				<!-- wp:query {"query":{"perPage":3,"offset":1,"postType":"post","order":"desc","orderBy":"date"}} -->
-				<div class="wp-block-query">
-					<!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
-						<!-- wp:template-part {"slug":"post-card","theme":"tiempo-noticias"} /-->
-					<!-- /wp:post-template -->
-				</div>
-				<!-- /wp:query -->
-			</div>
-			<!-- /wp:group -->
+			<!-- wp:shortcode -->[tiempo_related count="3" title="Notas relacionadas"]<!-- /wp:shortcode -->
 		</div>
 		<!-- /wp:column -->
 

@@ -7,7 +7,7 @@ Description: Block Theme editorial premium para portal de noticias con enfoque e
 Requires at least: 6.5
 Tested up to: 6.6
 Requires PHP: 8.0
-Version: 1.1.0
+Version: 1.2.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: tiempo-noticias
@@ -41,6 +41,52 @@ select:focus-visible {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.tn-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+}
+
+/* Breaking ticker */
+.tn-breaking-ticker {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  border-radius: 999px;
+  border: 1px solid var(--wp--preset--color--stroke);
+  padding: .4rem .75rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.tn-breaking-ticker__label {
+  white-space: nowrap;
+  background: var(--wp--preset--color--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: .2rem .65rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.tn-breaking-ticker__list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tn-breaking-ticker__list a {
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: .9rem;
 }
 
 /* Ads */
@@ -123,9 +169,52 @@ select:focus-visible {
   padding-top: 1.5rem;
 }
 
+.tn-related-posts h3 {
+  margin: 0 0 1rem;
+}
+
+.tn-related-posts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.tn-related-posts__item img {
+  border-radius: 10px;
+  margin-bottom: .45rem;
+}
+
+.tn-related-posts__item h4 {
+  font-size: .98rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.tn-related-posts__item a {
+  text-decoration: none;
+}
+
+@media (max-width: 920px) {
+  .tn-related-posts__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 781px) {
   .tn-section-title {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .tn-site-header {
+    position: static;
+  }
+
+  .tn-breaking-ticker {
+    border-radius: 12px;
+  }
+
+  .tn-related-posts__grid {
+    grid-template-columns: 1fr;
   }
 }
