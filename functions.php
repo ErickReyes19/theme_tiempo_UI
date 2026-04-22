@@ -20,3 +20,4 @@ require_once TIEMPO_NOTICIAS_PATH . '/inc/helpers.php';
 require_once TIEMPO_NOTICIAS_PATH . '/inc/layout-builder.php';
 require_once TIEMPO_NOTICIAS_PATH . '/inc/template-builder.php';
 require_once TIEMPO_NOTICIAS_PATH . '/inc/ads.php';
+require_once TIEMPO_NOTICIAS_PATH . '/inc/flexible-components.php';
