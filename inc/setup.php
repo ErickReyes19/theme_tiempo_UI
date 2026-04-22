@@ -18,6 +18,8 @@ function tiempo_noticias_setup() {
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'editor-styles' );
 	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'block-templates' );
+	add_theme_support( 'block-template-parts' );
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) );
 	add_theme_support( 'custom-logo', array( 'height' => 72, 'width' => 320, 'flex-height' => true, 'flex-width' => true ) );
